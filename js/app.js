@@ -31,6 +31,23 @@ var showQuestion = function(question) {
 	return result;
 };
 
+var showProfile = function(inspiration) {
+
+	var result = $('.templates .profile').clone();
+
+	var profileName = result.find('.display-name a');
+	profileName.attr('href', inspiration.link);
+	profileName.text(inspiration.display_name);
+
+	var reputationPoints = result.find('.reputation-points');
+	reputationPoints.text(inspiration.reputation);
+
+	var proPic = result.find('.profile-pic a');
+	proPic.attr('href', inspiration.profile_image);
+
+	return result;
+};
+
 
 // this function takes the results object from StackOverflow
 // and returns the number of results and tags to be appended to DOM
@@ -98,6 +115,11 @@ var topAnswerers = function(tag) {
 	.done(function(result) { //this waits for the ajax to return with a succesful promise object
 		var searchResults = showSearchResults(request.tagged, result.items.length);
 		$('.search-results').html(searchResults);
+
+		$.each(result.items, function(i, item) {
+			var inspiration = showProfile(item);
+			$('.results').append(inspiration);
+		});
 
 	});
 	.fail(function(jqXHR, error){ //this waits for the ajax to return with an error promise object
