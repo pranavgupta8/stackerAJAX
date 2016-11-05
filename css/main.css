@@ -41,6 +41,11 @@
 	margin: 0 auto 1em auto;
 }
 
+img {
+	float: right;
+	margin-top: -40px;
+}
+
 .error {
 	background-color: #F78181;
 	padding: 1em;

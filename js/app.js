@@ -36,14 +36,14 @@ var showProfile = function(inspiration) {
 	var result = $('.templates .profile').clone();
 
 	var profileName = result.find('.display-name a');
-	profileName.attr('href', inspiration.link);
-	profileName.text(inspiration.display_name);
+	profileName.attr('href', inspiration.user.link);
+	profileName.text(inspiration.user.display_name);
 
 	var reputationPoints = result.find('.reputation-points');
-	reputationPoints.text(inspiration.reputation);
+	reputationPoints.text(inspiration.user.reputation);
 
-	var proPic = result.find('.profile-pic a');
-	proPic.attr('href', inspiration.profile_image);
+	var proPic = result.find('.profile-pic img');
+	proPic.attr('src', inspiration.user.profile_image);
 
 	return result;
 };
@@ -121,7 +121,7 @@ var topAnswerers = function(tag) {
 			$('.results').append(inspiration);
 		});
 
-	});
+	})
 	.fail(function(jqXHR, error){ //this waits for the ajax to return with an error promise object
 		var errorElem = showError(error);
 		$('.search-results').append(errorElem);
